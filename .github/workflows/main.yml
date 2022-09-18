@@ -1,12 +1,14 @@
 name: Update custom hosts
 
 on:
+  push:
+    branches: [ "master" ]
   schedule:
     - cron: '0 00 * * *'
   workflow_dispatch:
 
 jobs:
-  build:
+  run:
     runs-on: ubuntu-latest
 
     steps:
