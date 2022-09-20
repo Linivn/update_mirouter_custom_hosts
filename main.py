@@ -132,8 +132,8 @@ if __name__ == '__main__':
     
     get_custom_hosts_res = operate_custom_host('get')
     if type(get_custom_hosts_res) != dict or get_custom_hosts_res.get('code', -1) != 0:
-        print('get_custom_hosts_res => ', get_custom_hosts_res)
-        raise Warning(json.dumps(get_custom_hosts_res))
+        print('更新异常 => ', get_custom_hosts_res)
+        exit(-1)
 
     custom_hosts = get_custom_hosts_res.get('hosts', [])
     github_ips_start = '127.0.0.1 le.github-ips.start'
@@ -161,4 +161,4 @@ if __name__ == '__main__':
     github_ips.insert(len(github_ips) + 1, github_ips_end)
     new_custom_hosts.extend(custom_hosts)
     new_custom_hosts.extend(github_ips)
-    print(operate_custom_host('set', new_custom_hosts))
+    print('更新结果 => ', operate_custom_host('set', new_custom_hosts))
