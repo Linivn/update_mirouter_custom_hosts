@@ -130,6 +130,7 @@ if __name__ == '__main__':
         # "# xxx",  # 整行会被忽略
     ]
     get_custom_hosts_res = operate_custom_host('get')
+    print('get_custom_hosts_res => ', get_custom_hosts_res)
     custom_hosts = get_custom_hosts_res.get('hosts', []) if type(get_custom_hosts_res) == dict else []
     github_ips_start = '127.0.0.1 le.github-ips.start'
     github_ips_end = '127.0.0.1 le.github-ips.end'
