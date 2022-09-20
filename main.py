@@ -133,7 +133,7 @@ if __name__ == '__main__':
     get_custom_hosts_res = operate_custom_host('get')
     if type(get_custom_hosts_res) != dict or get_custom_hosts_res.get('code', -1) != 0:
         print('更新异常 => ', get_custom_hosts_res)
-        exit(-1)
+        exit(0)
 
     custom_hosts = get_custom_hosts_res.get('hosts', [])
     github_ips_start = '127.0.0.1 le.github-ips.start'
