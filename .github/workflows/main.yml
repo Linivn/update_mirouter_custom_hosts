@@ -6,6 +6,10 @@ on:
   schedule:
     - cron: '0 00 * * *'
   workflow_dispatch:
+    inputs:
+      site_list:
+        description: '网址数组（json字符串格式）'
+        required: false
 
 jobs:
   run:
@@ -25,4 +29,5 @@ jobs:
 
       - name: Update hosts
         run: |
-          python main.py '${{ secrets.BASE_DATA }}'
+          site_list='${{ github.event.inputs.site_list }}'
+          python main.py '${{ secrets.BASE_DATA }}' $site_list
