@@ -116,8 +116,9 @@ def cover_ip(hosts):
 
 
 if __name__ == '__main__':
-    base_data = sys.argv[1]
-    site_list = sys.argv[2]
+    argv_len = len(sys.argv)
+    base_data = sys.argv[1] if argv_len >= 2 else ''
+    site_list = sys.argv[2] if argv_len >= 3 else ''
 
     try:
         base_data = json.loads(base_data)
