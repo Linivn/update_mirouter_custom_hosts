@@ -4,11 +4,11 @@ on:
 #  push:
 #    branches: [ "master" ]
   schedule:
-    - cron: '0 00 * * *'
+    - cron: '* 0-23/2 * * *'
   workflow_dispatch:
     inputs:
-      site_list:
-        description: '网址数组（json字符串格式）'
+      domain_list:
+        description: '域名数组（json字符串格式）'
         required: false
 
 jobs:
@@ -29,5 +29,5 @@ jobs:
 
       - name: Update hosts
         run: |
-          site_list='${{ github.event.inputs.site_list }}'
-          python main.py '${{ secrets.BASE_DATA }}' $site_list
+          domain_list='${{ github.event.inputs.domain_list }}'
+          python main.py '${{ secrets.BASE_DATA }}' $domain_list
