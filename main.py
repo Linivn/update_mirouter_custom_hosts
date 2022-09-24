@@ -118,7 +118,7 @@ def cover_ip(hosts):
 if __name__ == '__main__':
     argv_len = len(sys.argv)
     base_data = sys.argv[1] if argv_len >= 2 else ''
-    site_list = sys.argv[2] if argv_len >= 3 else ''
+    domain_list = sys.argv[2] if argv_len >= 3 else ''
 
     try:
         base_data = json.loads(base_data)
@@ -127,10 +127,10 @@ if __name__ == '__main__':
             '请配置正确的 base_data 参数，如 \'{"appId": "xxx", "deviceId": "xxx", "clientId": "xxx", "scope": "xxx", "token": "xxx"}\'')
 
     try:
-        if site_list:
-            site_list = json.loads(site_list)
+        if domain_list:
+            domain_list = json.loads(domain_list)
         else:
-            site_list = [
+            domain_list = [
                 "alive.github.com",
                 "live.github.com",
                 "github.githubassets.com",
@@ -173,7 +173,7 @@ if __name__ == '__main__':
             ]
     except:
         raise ValueError(
-            '请配置正确的 site_list 参数，如 \'["site1.com","site2.com"]\'')
+            '请配置正确的 domain_list 参数，如 \'["site1.com","site2.com"]\'')
 
     # 设置hosts时，注释会被忽略掉
     new_custom_hosts = [
@@ -207,7 +207,7 @@ if __name__ == '__main__':
     # github_ips = list(filter(lambda x: re.match(r'^\d', x), get_github_ips().split('\n')))
     # github_ips = get_github_ips()
     # print('github_ips => ', json.dumps(github_ips, indent=2))
-    github_ips = cover_ip(site_list)
+    github_ips = cover_ip(domain_list)
     print('new github_ips => ', json.dumps(github_ips, indent=2))
 
     # 添加 github_ips 内容的开始、结束元素，方便下次仅更新 github_ips 部分的内容
