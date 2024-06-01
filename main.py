@@ -116,6 +116,23 @@ def cover_ip(hosts):
 
 
 if __name__ == '__main__':
+    """
+    运行 Actions 前，需要先在 settings-Secrets and variables-Actions-Repository secrets 中设置 BASE_DATA:
+    {
+        "appId": "xxxxx",
+        "deviceId": "xxxxx",
+        "clientId": "xxxxx",
+        "scope": "xxxxx",
+        "token": "xxxxx"
+    }
+    
+    BASE_DATA 如何获取？
+    方法一 在 米家app-路由器管理-路由应用-自定义Hosts 复制链接
+        - 得到链接 http://s.miwifi.com/dist/userhosts/index.html?gatewayIp=0.0.0.0&model=xiaomi.router.xxx&deviceID=xxx#access_token=xxx&token_type=mac&expires_in=xxx&mac_algorithm=HmacSHA1&mac_key=xxx&scope=xxx&union_id=xxx
+        - 在浏览器中打开链接
+        - 在 开发者工具-网络 中复制请求 https://www.gorouter.info/api-third-party/service/internal/custom_host_get 的接口入参
+    方法二 抓取米家app数据包
+    """
     argv_len = len(sys.argv)
     base_data = sys.argv[1] if argv_len >= 2 else ''
     domain_list = sys.argv[2] if argv_len >= 3 else ''
@@ -132,43 +149,44 @@ if __name__ == '__main__':
         else:
             domain_list = [
                 "alive.github.com",
-                "live.github.com",
-                "github.githubassets.com",
-                "central.github.com",
-                "desktop.githubusercontent.com",
-                "assets-cdn.github.com",
-                "camo.githubusercontent.com",
-                "github.map.fastly.net",
-                "github.global.ssl.fastly.net",
-                "gist.github.com",
-                "github.io",
-                "github.com",
-                "github.blog",
                 "api.github.com",
-                "raw.githubusercontent.com",
-                "user-images.githubusercontent.com",
-                "favicons.githubusercontent.com",
-                "avatars5.githubusercontent.com",
-                "avatars4.githubusercontent.com",
-                "avatars3.githubusercontent.com",
-                "avatars2.githubusercontent.com",
-                "avatars1.githubusercontent.com",
-                "avatars0.githubusercontent.com",
+                "assets-cdn.github.com",
                 "avatars.githubusercontent.com",
+                "avatars0.githubusercontent.com",
+                "avatars1.githubusercontent.com",
+                "avatars2.githubusercontent.com",
+                "avatars3.githubusercontent.com",
+                "avatars4.githubusercontent.com",
+                "avatars5.githubusercontent.com",
+                "camo.githubusercontent.com",
+                "central.github.com",
+                "cloud.githubusercontent.com",
                 "codeload.github.com",
+                "collector.github.com",
+                "desktop.githubusercontent.com",
+                "education.github.com",
+                "favicons.githubusercontent.com",
+                "gist.github.com",
                 "github-cloud.s3.amazonaws.com",
                 "github-com.s3.amazonaws.com",
                 "github-production-release-asset-2e65be.s3.amazonaws.com",
-                "github-production-user-asset-6210df.s3.amazonaws.com",
                 "github-production-repository-file-5c1aeb.s3.amazonaws.com",
-                "githubstatus.com",
+                "github-production-user-asset-6210df.s3.amazonaws.com",
+                "github.blog",
+                "github.com",
                 "github.community",
                 "github.dev",
-                "collector.github.com",
-                "pipelines.actions.githubusercontent.com",
+                "github.githubassets.com",
+                "github.global.ssl.fastly.net",
+                "github.io",
+                "github.map.fastly.net",
+                "githubstatus.com",
+                "live.github.com",
                 "media.githubusercontent.com",
-                "cloud.githubusercontent.com",
                 "objects.githubusercontent.com",
+                "pipelines.actions.githubusercontent.com",
+                "raw.githubusercontent.com",
+                "user-images.githubusercontent.com",
                 "vscode.dev"
             ]
     except:
