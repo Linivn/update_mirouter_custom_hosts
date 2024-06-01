@@ -144,8 +144,10 @@ if __name__ == '__main__':
             '请配置正确的 base_data 参数，如 \'{"appId": "xxx", "deviceId": "xxx", "clientId": "xxx", "scope": "xxx", "token": "xxx"}\'')
 
     try:
+        from_input = False
         if domain_list:
             domain_list = json.loads(domain_list)
+            from_input = True
         else:
             domain_list = [
                 "alive.github.com",
@@ -189,6 +191,8 @@ if __name__ == '__main__':
                 "user-images.githubusercontent.com",
                 "vscode.dev"
             ]
+        
+        print('domain_list => ', from_input, json.dumps(custom_hosts, indent=2))
     except:
         raise ValueError(
             '请配置正确的 domain_list 参数，如 \'["site1.com","site2.com"]\'')
@@ -210,7 +214,7 @@ if __name__ == '__main__':
     github_ips_start = '127.0.0.1 le.github-ips.start'
     github_ips_end = '127.0.0.1 le.github-ips.end'
 
-    # print('custom_hosts => ', json.dumps(custom_hosts, indent=2))
+    print('custom_hosts => ', json.dumps(custom_hosts, indent=2))
     try:
         if custom_hosts.index(github_ips_start) >= 0:
             # 删除旧 github_ips 内容
@@ -220,7 +224,6 @@ if __name__ == '__main__':
         pass
 
     custom_hosts = cover_ip(custom_hosts)
-    # print('new custom_hosts => ', json.dumps(custom_hosts, indent=2))
 
     # github_ips = list(filter(lambda x: re.match(r'^\d', x), get_github_ips().split('\n')))
     # github_ips = get_github_ips()
@@ -233,4 +236,5 @@ if __name__ == '__main__':
     github_ips.insert(len(github_ips) + 1, github_ips_end)
     new_custom_hosts.extend(custom_hosts)
     new_custom_hosts.extend(github_ips)
+    print('new custom_hosts => ', json.dumps(custom_hosts, indent=2))
     print('更新结果 => ', operate_custom_host('set', new_custom_hosts))
