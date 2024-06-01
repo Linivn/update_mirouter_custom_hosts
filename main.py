@@ -192,7 +192,7 @@ if __name__ == '__main__':
                 "vscode.dev"
             ]
         
-        print('domain_list => ', from_input, json.dumps(custom_hosts, indent=2))
+        print('domain_list => ', from_input, json.dumps(domain_list, indent=2))
     except:
         raise ValueError(
             '请配置正确的 domain_list 参数，如 \'["site1.com","site2.com"]\'')
